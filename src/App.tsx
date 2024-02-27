@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import BoardPage from "./pages/boardPage/boardPage";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import BoardPage from './pages/boardPage/boardPage';
+import './App.css';
 
 function App() {
   return (
