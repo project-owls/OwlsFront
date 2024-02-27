@@ -1,10 +1,12 @@
-import React from "react";
+import Board from '../../components/boardPage/boardComponent';
+import Logo from '../../components/common/logo/logo';
 
-const BoardPage = () => {
+const BoardPage: React.FC = () => {
   return (
-    <div>
-      <p>게시판 페이지</p>
-    </div>
+    <Board>
+      <Logo />
+      <Board.searchBar />
+    </Board>
   );
 };
 
