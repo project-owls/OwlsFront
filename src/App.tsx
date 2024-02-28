@@ -7,7 +7,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/boardPage" element={<BoardPage />}></Route>
+          <Route path="/boardPage/:kind" element={<BoardPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
