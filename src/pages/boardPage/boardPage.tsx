@@ -6,6 +6,7 @@ const BoardPage: React.FC = () => {
     <Board>
       <Logo />
       <Board.searchBar />
+      <Board.navigationBar />
     </Board>
   );
 };

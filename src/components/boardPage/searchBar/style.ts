@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const styles = {
   Container: styled.div`
-    position: absolute;
+    position: relative;
     top: 90px;
     left: 290px;
 
@@ -20,10 +20,17 @@ const styles = {
     border: none;
     padding: 0 0 0 30px;
 
+    font-size: 20px;
+
     &::placeholder {
       color: #d9d9d9;
       font-size: 20px;
       font-weight: 550;
+    }
+
+    &:focus {
+      outline: none;
+      border: none;
     }
   `,
   SearchIcon: styled.img`
