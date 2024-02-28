@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './style';
+
+import { useRecoilState } from 'recoil';
+import { isClickedState } from '../../../states/isClickedState/isClickesstate';
 
 import coding from '../../../images/boardPage/coding.png';
 import design from '../../../images/boardPage/design.png';
@@ -19,10 +22,8 @@ const NavigationBar: React.FC = () => {
   };
 
   const ButtonName = ['코딩', '디자인', '편집', '마켓팅', '기획', '기타'];
-
-  const [isClicked, setIsClicked] = useState<boolean[]>(
-    new Array(6).fill(false),
-  );
+  // 전역 상태
+  const [isClicked, setIsClicked] = useRecoilState(isClickedState);
 
   return (
     <styles.Container>
@@ -33,6 +34,7 @@ const NavigationBar: React.FC = () => {
             to={path}
             key={index}
             onClick={() => {
+              //isClicked에 추가할 새로운 배열 형성 from메서드 이용, length속성에 들어간 값은 반환할 배열의 길이
               const newIsClicked = Array.from(
                 { length: ButtonName.length },
                 (_, idx) => idx === index,
