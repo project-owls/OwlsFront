@@ -1,41 +1,64 @@
-import React, { createContext } from 'react';
+import React, { SetStateAction, createContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import SearchBar from './searchBar/searchBar';
 import NavigationBar from './navigationBar/navigationBar';
+import ButtonBar from './buttonBar/buttonBar';
+import Article from './article/article';
+import PostSorter from './postSorter/postSorter';
 
-// 세션 정보 인터페이스 정의 (kind 제외)
-interface SessionData {
-  userId: string;
-  userProfileImage: string;
-  postTitle: string;
-  postType: string;
-  views: number;
-  likes: number;
-  createdAt: string;
-}
-
-// 기본 세션 데이터
-const defaultSessionData: SessionData = {
-  userId: '',
-  userProfileImage: '',
-  postTitle: '',
-  postType: '',
-  views: 0,
-  likes: 0,
-  createdAt: '',
+type Post = {
+  id: number;
+  kind: string;
+  author: string;
+  date: string;
+  content: string;
+  reactions: {
+    likes: number;
+    comments: number;
+  };
+  profile_url: string;
 };
 
-// 컨텍스트 값에 세션 데이터와 kind를 포함하는 인터페이스
+// 기본 세션 데이터
+const defaultSessionData: Post = {
+  id: 1,
+  kind: '스터디',
+  author: '작성자1',
+  date: '2024-02-22',
+  content: '이따 10시부터 코딩 같이 하실 분??',
+  reactions: {
+    likes: 120,
+    comments: 2,
+  },
+  profile_url:
+    'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
+};
+
+// 컨텍스트 값에 세션 데이터와 kind를 포함하는 인터페이스 ? 선택적 속성은 undefined일 수도 있음
 interface SessionContextType {
-  sessionData: SessionData;
+  data: Post[];
   kind?: string;
+  choose?: string;
+  dataChoose?: string;
+  setDataChoose?: React.Dispatch<SetStateAction<string>>;
+  postSort: boolean[];
+  setPostSort?: React.Dispatch<SetStateAction<boolean[]>>;
+  page: number;
+  setPage?: React.Dispatch<SetStateAction<number>>;
 }
 
 // 컨텍스트 생성 (기본값은 세션 데이터와 kind를 모두 포함)
 export const SessionContext = createContext<SessionContextType>({
-  sessionData: defaultSessionData,
+  data: [defaultSessionData],
   kind: undefined,
+  choose: undefined,
+  dataChoose: undefined,
+  setDataChoose: undefined,
+  postSort: [true, false],
+  setPostSort: undefined,
+  page: 1,
+  setPage: undefined,
 });
 
 interface ChildrenType {
@@ -45,15 +68,31 @@ interface ChildrenType {
 interface BoardComponentType extends React.FC<ChildrenType> {
   searchBar: React.FC; // SearchBar 컴포넌트의 타입을 여기에 지정
   navigationBar: React.FC;
+  buttonBar: React.FC;
+  article: React.FC;
+  postSorter: React.FC;
 }
 
 const Board: BoardComponentType = ({ children }) => {
-  const { kind } = useParams<{ kind: string }>();
-
+  //주소에 있는 파라미터 데이터를 받아옴
+  const { kind, choose } = useParams<{ kind: string; choose: string }>();
+  //전체,스터디 등의 버튼 선택용 state
+  const [dataChoose, setDataChoose] = useState<string>('total');
+  //최신순, 인기순 클릭
+  const [postSort, setPostSort] = useState<boolean[]>([true, false]);
+  //페이지네이션에 쓰일 페이지 숫자
+  const [page, setPage] = useState<number>(1);
   // 세션 컨텍스트 값에 세션 데이터와 kind 포함
   const sessionContextValue: SessionContextType = {
-    sessionData: defaultSessionData, // 세션 데이터
+    data: dummy, // 세션 데이터
     kind: kind, // 현재 페이지 종류
+    choose: choose,
+    dataChoose: dataChoose,
+    setDataChoose: setDataChoose,
+    postSort: postSort,
+    setPostSort: setPostSort,
+    page: page,
+    setPage: setPage,
   };
 
   return (
@@ -65,4 +104,167 @@ const Board: BoardComponentType = ({ children }) => {
 
 Board.searchBar = SearchBar;
 Board.navigationBar = NavigationBar;
+Board.buttonBar = ButtonBar;
+Board.article = Article;
+Board.postSorter = PostSorter;
+
 export default Board;
+// 더미데이터
+const dummy = [
+  {
+    id: 1,
+    kind: '스터디',
+    author: '작성자1',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
+  },
+  {
+    id: 2,
+    kind: '스터디',
+    author: '작성자2',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 3,
+    kind: '스터디',
+    author: '작성자3',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 1,
+    kind: '스터디',
+    author: '작성자1',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
+  },
+  {
+    id: 2,
+    kind: '스터디',
+    author: '작성자2',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 3,
+    kind: '스터디',
+    author: '작성자3',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 1,
+    kind: '스터디',
+    author: '작성자1',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
+  },
+  {
+    id: 2,
+    kind: '스터디',
+    author: '작성자2',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 3,
+    kind: '스터디',
+    author: '작성자3',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 1,
+    kind: '스터디',
+    author: '작성자1',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
+  },
+  {
+    id: 2,
+    kind: '스터디',
+    author: '작성자2',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+  {
+    id: 3,
+    kind: '스터디',
+    author: '작성자3',
+    date: '2024-02-22',
+    content: '이따 10시부터 코딩 같이 하실 분??',
+    reactions: {
+      likes: 120,
+      comments: 2,
+    },
+    profile_url:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
+  },
+];

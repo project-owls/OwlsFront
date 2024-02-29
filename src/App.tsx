@@ -9,7 +9,10 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route path="/boardPage/:kind" element={<BoardPage />}></Route>
+          <Route
+            path="/boardPage/:kind/:choose"
+            element={<BoardPage />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

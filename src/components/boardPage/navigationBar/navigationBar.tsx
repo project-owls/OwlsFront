@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './style';
 
 import { useRecoilState } from 'recoil';
@@ -11,7 +11,10 @@ import marketing from '../../../images/boardPage/marketting.png';
 import pm from '../../../images/boardPage/pm.png';
 import edit from '../../../images/boardPage/video.png';
 
+import { SessionContext } from '../boardComponent';
+
 const NavigationBar: React.FC = () => {
+  //이 객체의 키는 버튼이 가리킬 주소의 parameter로 들어가고 값은 버튼에 들어갈 아이콘 이미지 주소
   const iconImages = {
     coding: coding,
     design: design,
@@ -20,21 +23,22 @@ const NavigationBar: React.FC = () => {
     pm: pm,
     etc: etc,
   };
-
+  //버튼 밑에 들어가는 버튼 이름이 담긴 배열
   const ButtonName = ['코딩', '디자인', '편집', '마켓팅', '기획', '기타'];
   // 전역 상태
   const [isClicked, setIsClicked] = useRecoilState(isClickedState);
-
+  //boardPage내에서 공유하는 전체, 질문, 스터디 ,기타 중 유저가 선택한 데이터 -기본은 전체
+  const { dataChoose } = useContext(SessionContext);
   return (
     <styles.Container>
       {Object.entries(iconImages).map(([key, value], index) => {
-        const path = `/boardPage/${key}`;
+        const path = `/boardPage/${key}/${dataChoose}`;
         return (
           <styles.Link
             to={path}
             key={index}
             onClick={() => {
-              //isClicked에 추가할 새로운 배열 형성 from메서드 이용, length속성에 들어간 값은 반환할 배열의 길이
+              //isClicked에 추가할 새로운 배열 형성 from메서드 이용, length속성에 들어간 값은 반환할 배열의 길이 배열에서 현재 인덱스의 값만 참으로 바꾸고 이 인덱스에 들어있는 값을 스타일드 컴포넌트에  props로 내려서 해당 버튼 색만 변경
               const newIsClicked = Array.from(
                 { length: ButtonName.length },
                 (_, idx) => idx === index,
