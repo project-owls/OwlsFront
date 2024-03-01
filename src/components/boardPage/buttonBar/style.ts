@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import TrendingArticleProps from '../../../types/common/isBoard';
+
 interface ButtonProps {
   isClicked: boolean;
 }
 
 const styles = {
-  Container: styled.div`
+  Container: styled.div<TrendingArticleProps>`
+    ${({ isBoard }) =>
+      isBoard // 게시판페이지인 경우에만 상대적인 위치 사용
+        ? `
+      position: relative;
+      top: 130px;
+      left: 135px;
+    `
+        : ''}
+
     display: flex;
-    position: relative;
-    top: 180px;
-    left: 120px;
   `,
   Link: styled(Link)`
     text-decoration: none;
@@ -20,7 +28,7 @@ const styles = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 30px;
+    margin: 0 15px;
 
     background-color: ${({ isClicked }) => (isClicked ? '#EADE71' : '#D9D9D9')};
 

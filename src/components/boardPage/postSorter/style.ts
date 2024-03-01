@@ -6,7 +6,7 @@ interface PostSortProps {
 const styles = {
   Container: styled.div`
     position: relative;
-    top: 200px;
+    top: 180px;
     left: 140px;
 
     display: flex;

@@ -6,6 +6,9 @@ import NavigationBar from './navigationBar/navigationBar';
 import ButtonBar from './buttonBar/buttonBar';
 import Article from './article/article';
 import PostSorter from './postSorter/postSorter';
+import WriteButton from './writeButton/writeButton';
+import ChattingButton from './chattingButton/chattingButton';
+import TrendingArticle from './trendingArticle/trendingArticle';
 
 type Post = {
   id: number;
@@ -38,6 +41,7 @@ const defaultSessionData: Post = {
 // 컨텍스트 값에 세션 데이터와 kind를 포함하는 인터페이스 ? 선택적 속성은 undefined일 수도 있음
 interface SessionContextType {
   data: Post[];
+  trendingData: Post[];
   kind?: string;
   choose?: string;
   dataChoose?: string;
@@ -51,6 +55,7 @@ interface SessionContextType {
 // 컨텍스트 생성 (기본값은 세션 데이터와 kind를 모두 포함)
 export const SessionContext = createContext<SessionContextType>({
   data: [defaultSessionData],
+  trendingData: [defaultSessionData],
   kind: undefined,
   choose: undefined,
   dataChoose: undefined,
@@ -68,9 +73,12 @@ interface ChildrenType {
 interface BoardComponentType extends React.FC<ChildrenType> {
   searchBar: React.FC; // SearchBar 컴포넌트의 타입을 여기에 지정
   navigationBar: React.FC;
-  buttonBar: React.FC;
+  buttonBar: typeof ButtonBar;
   article: React.FC;
   postSorter: React.FC;
+  writeButton: React.FC;
+  chattingButton: React.FC;
+  trendingArticle: typeof TrendingArticle;
 }
 
 const Board: BoardComponentType = ({ children }) => {
@@ -84,8 +92,9 @@ const Board: BoardComponentType = ({ children }) => {
   const [page, setPage] = useState<number>(1);
   // 세션 컨텍스트 값에 세션 데이터와 kind 포함
   const sessionContextValue: SessionContextType = {
-    data: dummy, // 세션 데이터
-    kind: kind, // 현재 페이지 종류
+    data: dummy, //게시물 데이터 배열
+    trendingData: dummy,
+    kind: kind, // 현재 게시판 종류
     choose: choose,
     dataChoose: dataChoose,
     setDataChoose: setDataChoose,
@@ -107,6 +116,9 @@ Board.navigationBar = NavigationBar;
 Board.buttonBar = ButtonBar;
 Board.article = Article;
 Board.postSorter = PostSorter;
+Board.writeButton = WriteButton;
+Board.chattingButton = ChattingButton;
+Board.trendingArticle = TrendingArticle;
 
 export default Board;
 // 더미데이터
