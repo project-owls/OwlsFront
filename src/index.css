@@ -5,4 +5,5 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /*포지션을 이용해서 왼쪽으로 밀어준 요소들때문에 생긴 뷰포트 외부 공백으로 인한 가로 스크롤은 없애주기*/
 }

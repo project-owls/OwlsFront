@@ -2,11 +2,14 @@ import React, { useContext, useState } from 'react';
 import styles from './style';
 import { useParams } from 'react-router-dom';
 import { SessionContext } from '../boardComponent';
-const ButtonBar: React.FC = () => {
+
+import TrendingArticleProps from '../../../types/common/isBoard';
+
+const ButtonBar: React.FC<TrendingArticleProps> = ({ isBoard }) => {
   //사용자가 보고 싶은 게시글의 종류를 선택할 수 있는 버튼에 들어갈 이름 키는 주소에 들어갈 파라미터, 값은 버튼 이름으로 활용
   const ButtonName = {
     total: '전체',
-    queation: '질문',
+    question: '질문',
     study: '스터디',
     etc: '기타',
   };
@@ -19,7 +22,7 @@ const ButtonBar: React.FC = () => {
   //유저가 선택한 데이터의 종류를 바꿀 set함수
   const { setDataChoose } = useContext(SessionContext);
   return (
-    <styles.Container>
+    <styles.Container isBoard={isBoard}>
       {Object.entries(ButtonName).map(([choose, name], index) => {
         const path = `/boardPage/${kind}/${choose}`;
         return (

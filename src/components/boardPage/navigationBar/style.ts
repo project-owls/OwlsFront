@@ -7,6 +7,10 @@ interface ButtonProps {
 
 const styles = {
   Container: styled.div`
+    position: relative;
+    top: 100px;
+    left: 120px;
+
     display: flex;
   `,
   Link: styled(Link)<ButtonProps>`
@@ -15,9 +19,6 @@ const styles = {
     font-weight: ${({ isClicked }) => (isClicked ? 'bold' : 'normal')};
   `,
   Button: styled.div<ButtonProps>`
-    position: relative;
-    top: 150px;
-    left: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,9 +38,6 @@ const styles = {
     height: 30px;
   `,
   ButtonContainer: styled.div`
-    position: relative;
-    top: 150px;
-    left: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
