@@ -1,6 +1,8 @@
 import Board from '../../components/boardPage/boardComponent';
+
 import Logo from '../../components/common/logo/logo';
 import Paging from '../../components/common/pagination/paging';
+import ScrollAnimation from '../../components/common/scrollAnimation/scrollAnimation';
 
 const BoardPage: React.FC = () => {
   return (
@@ -24,6 +26,7 @@ const BoardPage: React.FC = () => {
       <Board.trendingArticle isBoard={true} />
       {/*페이지 네이션 */}
       <Paging />
+      <ScrollAnimation />
     </Board>
   );
 };
