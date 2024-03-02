@@ -22,6 +22,7 @@ const BoardPage: React.FC = () => {
       <Board.chattingButton />
       {/*뜨고있는 게시글 모음 게시판 페이지인지 아닌지에 따라 위치 변화및 디자인 변화 props로 boolean값 내려주기*/}
       <Board.trendingArticle isBoard={true} />
+      {/*페이지 네이션 */}
       <Paging />
     </Board>
   );
