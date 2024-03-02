@@ -253,30 +253,4 @@ const dummy = [
     profile_url:
       'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
   },
-  {
-    id: 2,
-    kind: '스터디',
-    author: '작성자2',
-    date: '2024-02-22',
-    content: '이따 10시부터 코딩 같이 하실 분??',
-    reactions: {
-      likes: 120,
-      comments: 2,
-    },
-    profile_url:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
-  },
-  {
-    id: 3,
-    kind: '스터디',
-    author: '작성자3',
-    date: '2024-02-22',
-    content: '이따 10시부터 코딩 같이 하실 분??',
-    reactions: {
-      likes: 120,
-      comments: 2,
-    },
-    profile_url:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP-18f8SJ7bm1eJoT-AD806ZJFwPkKWDEMhQ&usqp=CAU',
-  },
 ];
