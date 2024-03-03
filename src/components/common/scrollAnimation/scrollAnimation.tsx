@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import styles from './style';
-import Loading from '../../../images/common/loading.png';
+
+import Loading from '../loading/loading';
 import detectBottom from '../../../hooks/scrollAnimation/detectBottom';
 
 const ScrollAnimation: React.FC = () => {
@@ -34,12 +34,7 @@ const ScrollAnimation: React.FC = () => {
 
   return (
     <>
-      {isVisiblle && (
-        <styles.Container>
-          <styles.Image src={Loading} />
-          <styles.Message>더 이상 페이지를 내릴 수 없습니다.</styles.Message>
-        </styles.Container>
-      )}
+      {isVisiblle && <Loading message="더 이상 페이지를 내릴 수 없습니다." />}
     </>
   );
 };
