@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Loading from '../loading/loading';
 import detectBottom from '../../../hooks/scrollAnimation/detectBottom';
 
-const ScrollAnimation: React.FC = () => {
+const BottomWheelAnimation: React.FC = () => {
   const [atBottom, setAtBottom] = useState<boolean>(false);
   const [isVisiblle, setIsVisible] = useState<boolean>(false);
 
@@ -39,4 +39,4 @@ const ScrollAnimation: React.FC = () => {
   );
 };
 
-export default ScrollAnimation;
+export default BottomWheelAnimation;
