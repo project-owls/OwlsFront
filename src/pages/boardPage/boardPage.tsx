@@ -2,7 +2,8 @@ import Board from '../../components/boardPage/boardComponent';
 
 import Logo from '../../components/common/logo/logo';
 import Paging from '../../components/common/pagination/paging';
-import ScrollAnimation from '../../components/common/scrollAnimation/scrollAnimation';
+import BottomWheelAnimation from '../../components/common/bottomWheelAnimation/bottomWheelAnimation';
+import ScrollToTop from '../../components/common/scrollToTop/scrollToTop';
 
 const BoardPage: React.FC = () => {
   return (
@@ -26,7 +27,9 @@ const BoardPage: React.FC = () => {
       <Board.trendingArticle isBoard={true} />
       {/*페이지 네이션 */}
       <Paging />
-      <ScrollAnimation />
+      {/*페이지 최하단인데도 휠 사용시 로딩 화면 표시 */}
+      <BottomWheelAnimation />
+      <ScrollToTop />
     </Board>
   );
 };

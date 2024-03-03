@@ -32,7 +32,7 @@ const styles = {
   Image: styled.img`
     width: 122px;
     height: 122px;
-    animation: ${rotateAnimation} 3s linear infinite;
+    animation: ${rotateAnimation} 3s linear infinite; //에니메이션 속도는 시작부터 끝까지 일정하게 무한히 반복
   `,
 
   Message: styled.div`
