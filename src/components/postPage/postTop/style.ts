@@ -14,7 +14,7 @@ const styles = {
   Contnet: styled.p`
     color: #4e4e4e;
     font-size: 20px;
-    padding: 10px 40px;
+    padding: 30px;
   `,
 };
 

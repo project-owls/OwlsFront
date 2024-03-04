@@ -3,10 +3,11 @@ import styles from './style';
 import PostData from '../../../types/common/postData';
 interface ArticleProps {
   post: PostData;
+  id?: number;
 }
-const Article: React.FC<ArticleProps> = ({ post }) => {
+const Article: React.FC<ArticleProps> = ({ post, id }) => {
   return (
-    <styles.Container>
+    <styles.Container id={id}>
       <styles.TextContainer>
         <styles.Kind>{post.kind}</styles.Kind>
         <styles.Title>{post.content}</styles.Title>

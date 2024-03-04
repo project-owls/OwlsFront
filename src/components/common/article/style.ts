@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
+interface ArticleStylesProps {
+  id?: number;
+}
 const styles = {
-  Container: styled.div`
+  Container: styled.div<ArticleStylesProps>`
     position: relative;
-    top: 180px;
-    left: 140px;
+    top: ${({ id }) => (id ? '30px' : '180px')};
+    left: ${({ id }) => (id ? '30px' : '140px')};
 
     width: 750px;
-    border-bottom: solid 0.2px #d9d9d9;
+    border-bottom: ${({ id }) => (id ? 'none' : 'solid 0.2px #d9d9d9')};
   `,
   Kind: styled.p`
     color: #7a7a7a;
@@ -36,7 +39,7 @@ const styles = {
     width: 30px;
     height: 30px;
     border-radius: 50px;
-    margin: 0 10px;
+    margin-right: 10px;
   `,
 };
 

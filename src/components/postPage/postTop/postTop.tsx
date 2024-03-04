@@ -6,7 +6,7 @@ const PostTop: React.FC = () => {
   const { content, data } = useContext(SessionContext);
   return (
     <styles.Container>
-      <Article post={data} />
+      <Article post={data} id={1} />
       <styles.Contnet>{content}</styles.Contnet>
     </styles.Container>
   );
