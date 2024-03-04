@@ -1,7 +1,13 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import styles from './style';
+import { SessionContext } from '../postComponent';
 const PostTop: React.FC = () => {
-  return <div></div>;
+  const { content } = useContext(SessionContext);
+  return (
+    <styles.Container>
+      <styles.Contnet>{content}</styles.Contnet>
+    </styles.Container>
+  );
 };
 
 export default PostTop;

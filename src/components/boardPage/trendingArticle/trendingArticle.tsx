@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styles from './style';
-import articleStyle from '../article/style';
+import articleStyle from '../articles/style';
 import { SessionContext } from '../boardComponent';
 
 import First from '../../../images/boardPage/1.png';

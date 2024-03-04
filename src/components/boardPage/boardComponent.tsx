@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import SearchBar from './searchBar/searchBar';
 import NavigationBar from './navigationBar/navigationBar';
 import ButtonBar from './buttonBar/buttonBar';
-import Article from './article/article';
+import Articles from './articles/articles';
 import PostSorter from './postSorter/postSorter';
 import WriteButton from './writeButton/writeButton';
 import ChattingButton from './chattingButton/chattingButton';
@@ -74,7 +74,7 @@ interface BoardComponentType extends React.FC<ChildrenType> {
   searchBar: React.FC; // SearchBar 컴포넌트의 타입을 여기에 지정
   navigationBar: React.FC;
   buttonBar: typeof ButtonBar;
-  article: React.FC;
+  articles: React.FC;
   postSorter: React.FC;
   writeButton: React.FC;
   chattingButton: React.FC;
@@ -114,7 +114,7 @@ const Board: BoardComponentType = ({ children }) => {
 Board.searchBar = SearchBar;
 Board.navigationBar = NavigationBar;
 Board.buttonBar = ButtonBar;
-Board.article = Article;
+Board.articles = Articles;
 Board.postSorter = PostSorter;
 Board.writeButton = WriteButton;
 Board.chattingButton = ChattingButton;

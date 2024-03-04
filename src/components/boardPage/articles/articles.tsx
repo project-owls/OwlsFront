@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './style';
 import { SessionContext } from '../boardComponent';
 
-const Article: React.FC = () => {
+const Articles: React.FC = () => {
   //board 컴포넌트의 자식들에게 다 같이 공유하는 게시물 데이터
   const { data } = useContext(SessionContext);
   return (
@@ -29,4 +29,4 @@ const Article: React.FC = () => {
   );
 };
 
-export default Article;
+export default Articles;
