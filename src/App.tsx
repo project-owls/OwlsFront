@@ -1,8 +1,9 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import BoardPage from './pages/boardPage/boardPage';
-import './App.css';
+import PostPage from './pages/postPage/postPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             path="/boardPage/:kind/:choose"
             element={<BoardPage />}
           ></Route>
+          <Route path="/PostPage" element={<PostPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

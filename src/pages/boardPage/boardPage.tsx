@@ -18,7 +18,7 @@ const BoardPage: React.FC = () => {
       {/*게시물 수와 게시물 정렬 버튼이 포함된 컴포넌트 */}
       <Board.postSorter />
       {/*게시물 컴포넌트 */}
-      <Board.article />
+      <Board.articles />
       {/*글 작성 페이지로 연결해주는 버튼 */}
       <Board.writeButton />
       {/*채팅방으로 연결해주는 버튼 */}

@@ -1,30 +1,19 @@
 import React, { SetStateAction, createContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import PostData from '../../types/common/postData';
+
 import SearchBar from './searchBar/searchBar';
 import NavigationBar from './navigationBar/navigationBar';
 import ButtonBar from './buttonBar/buttonBar';
-import Article from './article/article';
+import Articles from './articles/articles';
 import PostSorter from './postSorter/postSorter';
 import WriteButton from './writeButton/writeButton';
 import ChattingButton from './chattingButton/chattingButton';
 import TrendingArticle from './trendingArticle/trendingArticle';
 
-type Post = {
-  id: number;
-  kind: string;
-  author: string;
-  date: string;
-  content: string;
-  reactions: {
-    likes: number;
-    comments: number;
-  };
-  profile_url: string;
-};
-
 // 기본 세션 데이터
-const defaultSessionData: Post = {
+const defaultSessionData: PostData = {
   id: 1,
   kind: '스터디',
   author: '작성자1',
@@ -40,8 +29,8 @@ const defaultSessionData: Post = {
 
 // 컨텍스트 값에 세션 데이터와 kind를 포함하는 인터페이스 ? 선택적 속성은 undefined일 수도 있음
 interface SessionContextType {
-  data: Post[];
-  trendingData: Post[];
+  data: PostData[];
+  trendingData: PostData[];
   kind?: string;
   choose?: string;
   dataChoose?: string;
@@ -74,7 +63,7 @@ interface BoardComponentType extends React.FC<ChildrenType> {
   searchBar: React.FC; // SearchBar 컴포넌트의 타입을 여기에 지정
   navigationBar: React.FC;
   buttonBar: typeof ButtonBar;
-  article: React.FC;
+  articles: React.FC;
   postSorter: React.FC;
   writeButton: React.FC;
   chattingButton: React.FC;
@@ -114,7 +103,7 @@ const Board: BoardComponentType = ({ children }) => {
 Board.searchBar = SearchBar;
 Board.navigationBar = NavigationBar;
 Board.buttonBar = ButtonBar;
-Board.article = Article;
+Board.articles = Articles;
 Board.postSorter = PostSorter;
 Board.writeButton = WriteButton;
 Board.chattingButton = ChattingButton;
