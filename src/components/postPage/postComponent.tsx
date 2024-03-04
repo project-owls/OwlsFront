@@ -1,18 +1,8 @@
 import React, { createContext } from 'react';
-import PostTop from './postTop/postTop';
 
-type PostData = {
-  id: number;
-  kind: string;
-  author: string;
-  date: string;
-  content: string;
-  reactions: {
-    likes: number;
-    comments: number;
-  };
-  profile_url: string;
-};
+import PostData from '../../types/common/postData';
+
+import PostTop from './postTop/postTop';
 
 interface SessionContextType {
   data: PostData;

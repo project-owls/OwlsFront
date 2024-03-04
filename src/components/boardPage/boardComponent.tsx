@@ -1,6 +1,8 @@
 import React, { SetStateAction, createContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import PostData from '../../types/common/postData';
+
 import SearchBar from './searchBar/searchBar';
 import NavigationBar from './navigationBar/navigationBar';
 import ButtonBar from './buttonBar/buttonBar';
@@ -10,21 +12,8 @@ import WriteButton from './writeButton/writeButton';
 import ChattingButton from './chattingButton/chattingButton';
 import TrendingArticle from './trendingArticle/trendingArticle';
 
-type Post = {
-  id: number;
-  kind: string;
-  author: string;
-  date: string;
-  content: string;
-  reactions: {
-    likes: number;
-    comments: number;
-  };
-  profile_url: string;
-};
-
 // 기본 세션 데이터
-const defaultSessionData: Post = {
+const defaultSessionData: PostData = {
   id: 1,
   kind: '스터디',
   author: '작성자1',
@@ -40,8 +29,8 @@ const defaultSessionData: Post = {
 
 // 컨텍스트 값에 세션 데이터와 kind를 포함하는 인터페이스 ? 선택적 속성은 undefined일 수도 있음
 interface SessionContextType {
-  data: Post[];
-  trendingData: Post[];
+  data: PostData[];
+  trendingData: PostData[];
   kind?: string;
   choose?: string;
   dataChoose?: string;

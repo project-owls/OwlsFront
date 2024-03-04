@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './style';
-
+import PostData from '../../../types/common/postData';
 interface ArticleProps {
-  post: Post;
+  post: PostData;
 }
-const Article = ({ post }) => {
+const Article: React.FC<ArticleProps> = ({ post }) => {
   return (
     <styles.Container>
       <styles.TextContainer>
