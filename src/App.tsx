@@ -10,11 +10,11 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/boardPage/:kind/:choose"
-            element={<BoardPage />}
-          ></Route>
-          <Route path="/PostPage" element={<PostPage />}></Route>
+          <Route path="/boardPage/" element={<BoardPage />}>
+            <Route path=":kind/" element={<BoardPage />} />
+            <Route path=":kind/:choose" element={<BoardPage />} />
+          </Route>
+          <Route path="/PostPage" element={<PostPage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

@@ -4,7 +4,8 @@ import Arrow from '../../../images/common/Arrow.png';
 import detectTop from '../../../hooks/scrollAnimation/detectTop';
 
 const ScrollToTop: React.FC = () => {
-  const [atTop, setAtTop] = useState<boolean>(false);
+  //처음에 렌더링 될 때는 스크롤을 안한 상태일테니까 기본 값 true로 설정
+  const [atTop, setAtTop] = useState<boolean>(true);
 
   useEffect(() => {
     const handleScroll = () => {
