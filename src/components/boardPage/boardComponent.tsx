@@ -84,7 +84,7 @@ const Board: BoardComponentType = ({ children }) => {
     data: dummy, //게시물 데이터 배열
     trendingData: dummy,
     kind: kind, // 현재 게시판 종류
-    choose: choose,
+    choose: choose, //게시판의 데이터 종류
     dataChoose: dataChoose,
     setDataChoose: setDataChoose,
     postSort: postSort,
