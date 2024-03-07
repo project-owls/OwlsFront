@@ -9,16 +9,15 @@ const Article: React.FC<ArticleProps> = ({ post, id }) => {
   return (
     <styles.Container id={id}>
       <styles.TextContainer>
-        <styles.Kind>{post.kind}</styles.Kind>
-        <styles.Title>{post.content}</styles.Title>
+        <styles.Kind>{post.boardCategory.name}</styles.Kind>
+        <styles.Title>{post.title}</styles.Title>
         <styles.Text>
-          조회{post.reactions.comments} • 추천수 {post.reactions.likes} •{' '}
-          {post.date}
+          조회{post.views} • 추천수 {post.likeCount} • {post.updatedAt}
         </styles.Text>
       </styles.TextContainer>
       <styles.UserInfo>
-        <styles.UserProfile src={post.profile_url} />
-        <styles.Text>{post.author}</styles.Text>
+        <styles.UserProfile src={post.content} />
+        <styles.Text>{post.user.nickname}</styles.Text>
       </styles.UserInfo>
     </styles.Container>
   );

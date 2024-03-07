@@ -9,19 +9,21 @@ interface SessionContextType {
   content: string;
 }
 
-// 기본 세션 데이터
 const defaultSessionData: PostData = {
-  id: 1,
-  kind: '스터디',
-  author: '작성자1',
-  date: '2024-02-22',
-  content: '이따 10시부터 코딩 같이 하실 분??',
-  reactions: {
-    likes: 120,
-    comments: 2,
+  id: 2, // 예시로 든 글 ID
+  title: '테스트 제목', // 예시로 든 글 제목
+  content: '테스트 내용', // 예시로 든 글 내용
+  views: 0, // 조회 수
+  likeCount: 1, // 좋아요 수
+  createdAt: '2024-03-03T15:33:02.921Z', // 생성 날짜
+  updatedAt: '2024-03-04T03:01:29.665Z', // 업데이트 날짜
+  user: {
+    nickname: '별명', // 사용자 닉네임
   },
-  profile_url:
-    'https://media.istockphoto.com/id/1319763895/photo/smiling-mixed-race-mature-man-on-grey-background.jpg?s=612x612&w=0&k=20&c=ZiuzNX9LhTMMcRFrYNfq_zFR7O_aH-q7x1L5elko5uU=',
+  boardCategory: {
+    name: '게시판 카테고리', // 게시판 카테고리 이름
+  },
+  FileUpload: [],
 };
 
 // 컨텍스트 생성

@@ -1,14 +1,18 @@
 type PostData = {
   id: number;
-  kind: string;
-  author: string;
-  date: string;
+  title: string;
   content: string;
-  reactions: {
-    likes: number;
-    comments: number;
+  views: number;
+  likeCount: number;
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    nickname: string;
   };
-  profile_url: string;
+  boardCategory: {
+    name: string;
+  };
+  FileUpload: [];
 };
 
 export default PostData;
