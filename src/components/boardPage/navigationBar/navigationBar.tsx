@@ -33,6 +33,7 @@ const NavigationBar: React.FC = () => {
     <styles.Container>
       {Object.entries(iconImages).map(([key, value], index) => {
         const path = `/boardPage/${key}/${dataChoose}`;
+
         return (
           <styles.Link
             to={path}

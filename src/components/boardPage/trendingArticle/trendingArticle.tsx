@@ -26,10 +26,10 @@ const TrendingArticle: React.FC<TrendingArticleProps> = ({ isBoard }) => {
             <styles.ArticleContainer isBoard={isBoard}>
               <styles.ImageIcon src={numbers[index]} />
               <articleStyle.TextContainer key={index}>
-                <articleStyle.Title>{post.content}</articleStyle.Title>
+                <articleStyle.Title>{post.title}</articleStyle.Title>
                 <articleStyle.Text>
-                  조회{post.reactions.comments} • 추천수 {post.reactions.likes}{' '}
-                  • {post.kind}
+                  조회{post.views} • 추천수 {post.likeCount} •{' '}
+                  {post.boardCategory.name}
                 </articleStyle.Text>
               </articleStyle.TextContainer>
             </styles.ArticleContainer>
