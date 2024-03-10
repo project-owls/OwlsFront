@@ -98,7 +98,7 @@ const Board: BoardComponentType = ({ children }) => {
         });
 
         const response = await axiosInstance.get(
-          `boards/views?category_id=${2}&page=${page}&sort=views`,
+          `boards/views?category_id=${3}&page=${page}&sort=views`,
         );
         setData(response.data);
       } catch (error) {
@@ -106,6 +106,7 @@ const Board: BoardComponentType = ({ children }) => {
       }
     };
     fetchUserData();
+    console.log(data);
   }, []);
 
   const sessionContextValue: SessionContextType = {

@@ -15,6 +15,7 @@ const PostPage: React.FC = () => {
       <Board.navigationBar />
       <Post>
         <Post.postTop />
+        <Post.commentBox />
       </Post>
       {/*글 작성 페이지로 연결해주는 버튼 */}
       <Board.writeButton />

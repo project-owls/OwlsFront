@@ -3,6 +3,7 @@ import React, { createContext } from 'react';
 import PostData from '../../types/common/postData';
 
 import PostTop from './postTop/postTop';
+import CommentBox from './commentBox/commentBox';
 
 interface SessionContextType {
   data: PostData;
@@ -38,6 +39,7 @@ interface ChildrenType {
 // Post 컴포넌트가 가질 수 있는 추가적인 static 속성을 정의
 interface PostComponentType extends React.FC<ChildrenType> {
   postTop: React.FC;
+  commentBox: React.FC;
 }
 const Post: PostComponentType = ({ children }) => {
   const sessionContextValue: SessionContextType = {
@@ -56,3 +58,4 @@ const Post: PostComponentType = ({ children }) => {
 export default Post;
 
 Post.postTop = PostTop;
+Post.commentBox = CommentBox;
