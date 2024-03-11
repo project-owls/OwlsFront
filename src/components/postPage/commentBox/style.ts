@@ -7,9 +7,10 @@ const styles = {
     left: 165px;
 
     width: 700px;
-    height: 350px;
     border: solid 0.2px #d9d9d9;
     border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   `,
   WriteCommentContainer: styled.div`
     position: relative;
