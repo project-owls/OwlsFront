@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const styles = {
   Container: styled.div`
     position: relative;
-    top: -300px;
+    top: -400px;
     left: 165px;
 
     width: 700px;
@@ -28,10 +28,18 @@ const styles = {
     background-color: transparent;
     border: none;
 
+    color: #4e4e4e;
+    font-size: 20px;
+    padding: 0 20px;
+
     &::placeholder {
       color: #d9d9d9;
-      font-size: 20px;
-      padding: 0 20px;
+      font-weight: 550;
+    }
+
+    &:focus {
+      outline: none;
+      border: none;
     }
   `,
   WriteButton: styled.div`
