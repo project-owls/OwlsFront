@@ -1,13 +1,14 @@
 import React, { createContext } from 'react';
 
 import PostData from '../../types/common/postData';
-
+import CommentType from '../../types/common/comment';
 import PostTop from './postTop/postTop';
 import CommentBox from './commentBox/commentBox';
 
 interface SessionContextType {
   data: PostData;
   content: string;
+  comments: CommentType[];
 }
 
 const defaultSessionData: PostData = {
@@ -31,6 +32,7 @@ const defaultSessionData: PostData = {
 export const SessionContext = createContext<SessionContextType>({
   data: defaultSessionData,
   content: '',
+  comments: [],
 });
 
 interface ChildrenType {
@@ -46,6 +48,7 @@ const Post: PostComponentType = ({ children }) => {
     data: defaultSessionData,
     content:
       '강의 보는대로 flutter doctor -v치고 확인하니 이렇게 에러가 뜨네요 에러 뜬 링크대로 비쥬얼스튜디오를 다운로드 받았는데도 계속 뜨네요 ㅠ',
+    comments: comments,
   };
 
   return (
@@ -59,3 +62,34 @@ export default Post;
 
 Post.postTop = PostTop;
 Post.commentBox = CommentBox;
+
+const comments = [
+  {
+    id: 1,
+    content:
+      'Visual Studio - develop Windows apps로 표시된 부분은 Visual Studio가 설치되어 있지 않거나, 설치가 되어 있어도 Flutter 개발에 필요한 특정 컴포넌트가 설치되지 않았음을 의미합니다.',
+    likeCount: 5,
+    createdAt: '2024-03-03T14:43:11.128Z',
+    user: {
+      nickname: '하마',
+    },
+  },
+  {
+    id: 2,
+    content: 'ㅋㅋㅋ',
+    likeCount: 3,
+    createdAt: '2024-03-03T15:51:34.1458Z',
+    user: {
+      nickname: '코끼리',
+    },
+    comment: {
+      id: 1,
+      content: 'ㅋㅋㅋㅋ',
+      likeCount: 5,
+      createdAt: '2024-03-03T14:43:11.128Z',
+      user: {
+        nickname: '제니',
+      },
+    },
+  },
+];

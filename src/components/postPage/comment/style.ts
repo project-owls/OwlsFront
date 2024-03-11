@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 interface ColorProps {
   color: string;
   cursor?: boolean;
@@ -8,17 +9,19 @@ const styles = {
     position: relative;
     top: 0;
 
-    width: 700px;
+    width: 97%;
   `,
   Top: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    height: 30px;
   `,
   ProfileImg: styled.img`
     padding: 10px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50px;
     cursor: pointer;
   `,
@@ -38,7 +41,7 @@ const styles = {
     top: -10px;
     color: #4e4e4e;
     font-size: 10px;
-    padding: 0 10px;
+    padding: 5px 10px;
   `,
   Bottom: styled.div`
     position: relative;
@@ -46,7 +49,9 @@ const styles = {
 
     display: flex;
     align-items: center;
-    padding: 0 10px;
+
+    height: 20px;
+    padding: 0 5px;
   `,
   Likes: styled.img`
     width: 15px;
