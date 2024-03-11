@@ -64,10 +64,10 @@ const styles = {
     padding: 30px;
   `,
   IconContainer: styled.div`
-    display: flex;r;
+    display: flex;
     align-items: center;
 
-    padding:0 30px;
+    padding: 0 30px;
   `,
   IconImage: styled.img`
     width: 20px;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './styles';
 import Pencil from '../../../images/boardPage/pencil.png';
+import Comment from '../comment/comment';
+
 const CommentBox: React.FC = () => {
   return (
     <styles.Container>
@@ -10,6 +12,7 @@ const CommentBox: React.FC = () => {
           <styles.Pencil src={Pencil} />
         </styles.WriteButton>
       </styles.WriteCommentContainer>
+      <Comment />
     </styles.Container>
   );
 };
