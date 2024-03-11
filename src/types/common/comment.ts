@@ -15,5 +15,5 @@ export default interface CommentType {
   likeCount: number;
   createdAt: string;
   user: User;
-  comment?: CommentBasic;
+  comment?: CommentBasic[];
 }

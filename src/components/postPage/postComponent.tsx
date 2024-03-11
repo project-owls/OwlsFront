@@ -73,6 +73,18 @@ const comments = [
     user: {
       nickname: '하마',
     },
+    comment: [
+      {
+        id: 1,
+        content:
+          'Visual Studio - develop Windows apps로 표시된 부분은 Visual Studio가 설치되어 있지 않거나, 설치가 되어 있어도 Flutter 개발에 필요한 특정 컴포넌트가 설치되지 않았음을 의미합니다.',
+        likeCount: 5,
+        createdAt: '2024-03-03T14:43:11.128Z',
+        user: {
+          nickname: '하마',
+        },
+      },
+    ],
   },
   {
     id: 2,
@@ -82,14 +94,16 @@ const comments = [
     user: {
       nickname: '코끼리',
     },
-    comment: {
-      id: 1,
-      content: 'ㅋㅋㅋㅋ',
-      likeCount: 5,
-      createdAt: '2024-03-03T14:43:11.128Z',
-      user: {
-        nickname: '제니',
+    comment: [
+      {
+        id: 1,
+        content: 'ㅋㅋㅋㅋ',
+        likeCount: 5,
+        createdAt: '2024-03-03T14:43:11.128Z',
+        user: {
+          nickname: '제니',
+        },
       },
-    },
+    ],
   },
 ];
