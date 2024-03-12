@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './style';
 import { SessionContext } from '../postComponent';
 import Pencil from '../../../images/boardPage/pencil.png';
-import Comment from '../comment/comment';
+import CommentTotal from '../commentTotal/commentTotal';
 
 const CommentBox: React.FC = () => {
   const { comments } = useContext(SessionContext);
@@ -14,7 +14,7 @@ const CommentBox: React.FC = () => {
           <styles.Pencil src={Pencil} />
         </styles.WriteButton>
       </styles.WriteCommentContainer>
-      <Comment comments={comments} />
+      <CommentTotal comments={comments} />
     </styles.Container>
   );
 };
