@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+//import { useParams } from 'react-router-dom';
 
 import PostData from '../../types/common/postData';
 import CommentType from '../../types/common/comment';
@@ -44,6 +45,8 @@ interface PostComponentType extends React.FC<ChildrenType> {
   commentBox: React.FC;
 }
 const Post: PostComponentType = ({ children }) => {
+  //게시글 클릭시 게시글을 데이터를 받아올때 사용할 id
+  //const { board_id } = useParams<{ board_id: string }>();
   const sessionContextValue: SessionContextType = {
     data: defaultSessionData,
     content:

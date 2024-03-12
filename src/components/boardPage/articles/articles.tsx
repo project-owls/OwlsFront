@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-
+import styles from './style';
 import { SessionContext } from '../boardComponent';
 import Article from '../../common/article/article';
 
@@ -9,7 +9,12 @@ const Articles: React.FC = () => {
   return (
     <div>
       {data.map((post, index) => {
-        return <Article post={post} key={index} />;
+        const path = `/postPage/${post.id}`;
+        return (
+          <styles.Link to={path} key={index}>
+            <Article post={post} />
+          </styles.Link>
+        );
       })}
     </div>
   );
