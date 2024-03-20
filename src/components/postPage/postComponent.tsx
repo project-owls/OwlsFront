@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { SetStateAction } from 'react';
 //import { useParams } from 'react-router-dom';
 
-import axios from 'axios';
+import axiosInstance from '../api/axiosInatance';
 
 import PostData from '../../types/common/postData';
 import CommentType from '../../types/PostPage/comment';
@@ -65,30 +65,22 @@ const Post: PostComponentType = ({ children }) => {
 
   //댓글창에 입력중인 값을 저장
   const [writtingComment, setWrittingComment] = useState<string>('');
-  //const [data, setData] = useState();
+  const [data, setData] = useState<PostData>(defaultSessionData);
   const [likeCount, setLikeCount] = useState<number>(0);
   //댓글 배열
   const [comments, setComments] = useState<CommentType[]>(defaultcomments);
 
   const getPostData = async () => {
     try {
-      const axiosInstance = axios.create({
-        baseURL: 'http://3.35.126.85:3000/',
-      });
-
-      const response = await axiosInstance.get(`boards/views/${board_id}`);
+      const response = await axiosInstance.get(`boards/view/${board_id}`);
       console.log(response);
-      //setData(response.data.data);
+      setData(response.data.data);
     } catch (error) {
       console.error('유저 데이터 가져오기 실패:', error);
     }
   };
   const getCommentsData = async () => {
     try {
-      const axiosInstance = axios.create({
-        baseURL: 'http://3.35.126.85:3000/',
-      });
-
       const response = await axiosInstance.get(`comments/${board_id}`);
       console.log(response);
       setComments(response.data.data);
@@ -99,10 +91,6 @@ const Post: PostComponentType = ({ children }) => {
   };
   const postCommentData = async () => {
     try {
-      const axiosInstance = axios.create({
-        baseURL: 'http://3.35.126.85:3000/',
-      });
-
       const response = await axiosInstance.post(`comments/${board_id}`);
       console.log(response);
       setComments(response.data.data);
@@ -114,10 +102,10 @@ const Post: PostComponentType = ({ children }) => {
     getPostData(); //게시글 데이터 받아오기
     getCommentsData(); //댓글 데이터 받아오기
     postCommentData();
-  }, [likeCount]);
+  }, [likeCount, board_id]);
 
   const sessionContextValue: SessionContextType = {
-    data: defaultSessionData,
+    data: data,
     comments: comments,
     writtingComment: writtingComment,
     setWrittingComment: setWrittingComment,
