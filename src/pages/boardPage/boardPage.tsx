@@ -16,9 +16,9 @@ const BoardPage: React.FC = () => {
       {/*게시판 내에 게시물의 종류 선택용 버튼 컴포넌트 */}
       <Board.buttonBar isBoard={true} />
       {/*게시물 수와 게시물 정렬 버튼이 포함된 컴포넌트 */}
-      <Board.postSorter />
+      {<Board.postSorter />}
       {/*게시물 컴포넌트 */}
-      <Board.articles />
+      {<Board.articles />}
       {/*글 작성 페이지로 연결해주는 버튼 */}
       <Board.writeButton />
       {/*채팅방으로 연결해주는 버튼 */}

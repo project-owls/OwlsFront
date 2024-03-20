@@ -10,7 +10,7 @@ const PostTop: React.FC = () => {
   const { content, data } = useContext(SessionContext);
   return (
     <styles.Container>
-      <Article post={data} id={1} />
+      <Article post={data} isBoard={false} />
       <styles.Contnet>{content}</styles.Contnet>
       <styles.IconContainer>
         <styles.IconImage src={Likes} />

@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import PostData from '../../types/common/postData';
+import BoardData from '../../types/common/boardData';
 
 import SearchBar from './searchBar/searchBar';
 import NavigationBar from './navigationBar/navigationBar';
@@ -16,51 +16,41 @@ import PostSorter from './postSorter/postSorter';
 import WriteButton from './writeButton/writeButton';
 import ChattingButton from './chattingButton/chattingButton';
 import TrendingArticle from './trendingArticle/trendingArticle';
-
 // 기본 세션 데이터
-const defaultSessionData: PostData = {
-  id: 2, // 예시로 든 글 ID
-  title: '테스트 제목', // 예시로 든 글 제목
-  content: '테스트 내용', // 예시로 든 글 내용
-  views: 0, // 조회 수
-  likeCount: 1, // 좋아요 수
-  createdAt: '2024-03-03T15:33:02.921Z', // 생성 날짜
-  updatedAt: '2024-03-04T03:01:29.665Z', // 업데이트 날짜
-  user: {
-    nickname: '별명', // 사용자 닉네임
-  },
-  boardCategory: {
-    name: '게시판 카테고리', // 게시판 카테고리 이름
-  },
-  FileUpload: [],
+const defaultSessionData: BoardData = {
+  category: '',
+  boards: [],
+  boardTotalCount: 0,
+  boardTotalPage: 0,
 };
 
 // 컨텍스트 값에 세션 데이터와 kind를 포함하는 인터페이스 ? 선택적 속성은 undefined일 수도 있음
 interface SessionContextType {
-  data: PostData[];
-  trendingData: PostData[];
+  data: BoardData;
+  trendingData: BoardData;
   kind?: string;
   choose?: string;
   dataChoose?: string;
   setDataChoose?: React.Dispatch<SetStateAction<string>>;
-  postSort: boolean[];
-  setPostSort?: React.Dispatch<SetStateAction<boolean[]>>;
+  postSort: string;
+  setPostSort?: React.Dispatch<SetStateAction<string>>;
   page: number;
   setPage?: React.Dispatch<SetStateAction<number>>;
+  setCategoryId?: React.Dispatch<SetStateAction<number>>;
 }
-
 // 컨텍스트 생성 (기본값은 세션 데이터와 kind를 모두 포함)
 export const SessionContext = createContext<SessionContextType>({
-  data: [defaultSessionData],
-  trendingData: [defaultSessionData],
+  data: defaultSessionData,
+  trendingData: defaultSessionData,
   kind: undefined,
   choose: undefined,
   dataChoose: undefined,
   setDataChoose: undefined,
-  postSort: [true, false],
+  postSort: 'current',
   setPostSort: undefined,
   page: 1,
   setPage: undefined,
+  setCategoryId: undefined,
 });
 
 interface ChildrenType {
@@ -84,34 +74,36 @@ const Board: BoardComponentType = ({ children }) => {
   //전체,스터디 등의 버튼 선택용 state
   const [dataChoose, setDataChoose] = useState<string>('total');
   //최신순, 인기순 클릭
-  const [postSort, setPostSort] = useState<boolean[]>([true, false]);
+  const [postSort, setPostSort] = useState<string>('current');
   //페이지네이션에 쓰일 페이지 숫자
   const [page, setPage] = useState<number>(1);
   // 유저 데이터
-  const [data, setData] = useState<PostData[]>([defaultSessionData]);
+  const [data, setData] = useState<BoardData>(defaultSessionData);
 
+  //카테고리 id
+  const [categoryId, setCategoryId] = useState<number>(1);
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
         const axiosInstance = axios.create({
-          baseURL: 'http://3.34.45.144:3000/',
+          baseURL: 'http://3.35.126.85:3000/',
         });
-
+        console.log('카테고리 아이디', categoryId);
         const response = await axiosInstance.get(
-          `boards/views?category_id=${3}&page=${page}&sort=views`,
+          `boards/views?category_id=${categoryId}&page=${page}&sort=${postSort}`,
         );
-        setData(response.data);
+
+        setData(response.data.data);
       } catch (error) {
         console.error('유저 데이터 가져오기 실패:', error);
       }
     };
-    fetchUserData();
-    console.log(data);
-  }, []);
+    fetchData();
+  }, [page, categoryId]);
 
   const sessionContextValue: SessionContextType = {
-    data: data, //게시물 데이터 배열
-    trendingData: [defaultSessionData],
+    data: data, //서버에서 받아온 데이터 배열
+    trendingData: defaultSessionData,
     kind: kind, // 현재 게시판 종류
     choose: choose, //게시판의 데이터 종류
     dataChoose: dataChoose,
@@ -120,6 +112,7 @@ const Board: BoardComponentType = ({ children }) => {
     setPostSort: setPostSort,
     page: page,
     setPage: setPage,
+    setCategoryId: setCategoryId,
   };
 
   return (

@@ -12,7 +12,7 @@ import ButtonBar from '../buttonBar/buttonBar';
 
 const TrendingArticle: React.FC<TrendingArticleProps> = ({ isBoard }) => {
   const numbers = [First, Second, Third];
-  const { trendingData } = useContext(SessionContext);
+  const { data } = useContext(SessionContext);
 
   return (
     <styles.Container isBoard={isBoard}>
@@ -20,7 +20,7 @@ const TrendingArticle: React.FC<TrendingArticleProps> = ({ isBoard }) => {
         <styles.Title>이 게시판에서 많이 본 글 </styles.Title>
         {!isBoard && <ButtonBar isBoard={isBoard} />}
       </styles.TopContainer>
-      {trendingData.slice(0, 3).map((post, index) => {
+      {data.boards.slice(0, 3).map((post, index) => {
         return (
           <>
             <styles.ArticleContainer isBoard={isBoard}>

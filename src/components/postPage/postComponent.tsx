@@ -1,4 +1,6 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
+import { SetStateAction } from 'react';
+//import { useParams } from 'react-router-dom';
 
 import PostData from '../../types/common/postData';
 import CommentType from '../../types/common/comment';
@@ -9,18 +11,25 @@ interface SessionContextType {
   data: PostData;
   content: string;
   comments: CommentType[];
+  writtingComment?: string;
+  setWrittingComment?: React.Dispatch<SetStateAction<string>>;
 }
 
 const defaultSessionData: PostData = {
   id: 2, // 예시로 든 글 ID
   title: '테스트 제목', // 예시로 든 글 제목
   content: '테스트 내용', // 예시로 든 글 내용
+  published: true,
   views: 0, // 조회 수
   likeCount: 1, // 좋아요 수
   createdAt: '2024-03-03T15:33:02.921Z', // 생성 날짜
   updatedAt: '2024-03-04T03:01:29.665Z', // 업데이트 날짜
   user: {
+    id: 1,
     nickname: '별명', // 사용자 닉네임
+    profileImage: {
+      url: 'string;',
+    },
   },
   boardCategory: {
     name: '게시판 카테고리', // 게시판 카테고리 이름
@@ -33,6 +42,8 @@ export const SessionContext = createContext<SessionContextType>({
   data: defaultSessionData,
   content: '',
   comments: [],
+  writtingComment: undefined,
+  setWrittingComment: undefined,
 });
 
 interface ChildrenType {
@@ -44,11 +55,19 @@ interface PostComponentType extends React.FC<ChildrenType> {
   commentBox: React.FC;
 }
 const Post: PostComponentType = ({ children }) => {
+  //게시글 클릭시 게시글을 데이터를 받아올때 사용할 id
+  //const { board_id } = useParams<{ board_id: string }>();
+
+  //댓글창에 입력중인 값을 저장
+  const [writtingComment, setWrittingComment] = useState<string>('');
+
   const sessionContextValue: SessionContextType = {
     data: defaultSessionData,
     content:
       '강의 보는대로 flutter doctor -v치고 확인하니 이렇게 에러가 뜨네요 에러 뜬 링크대로 비쥬얼스튜디오를 다운로드 받았는데도 계속 뜨네요 ㅠ',
     comments: comments,
+    writtingComment: writtingComment,
+    setWrittingComment: setWrittingComment,
   };
 
   return (

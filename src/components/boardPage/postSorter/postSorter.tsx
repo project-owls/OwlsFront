@@ -4,25 +4,24 @@ import { SessionContext } from '../boardComponent';
 
 const PostSorter: React.FC = () => {
   //board 컴포넌트 자식 컴포넌트들에게 다 같이 공유할 게시물 데이터 - 이 컴포넌트에서는 게시물 수 표시 용도로만 사용
-  const { data } = useContext(SessionContext);
-  const { postSort, setPostSort } = useContext(SessionContext);
+  const { postSort, setPostSort, data } = useContext(SessionContext);
   return (
     <styles.Container>
-      <styles.Count>{data.length}개</styles.Count>
+      <styles.Count>{data.boards.length}개</styles.Count>
       <styles.TextContainer>
         <styles.Text
           onClick={() => {
-            setPostSort && setPostSort([true, false]);
+            setPostSort && setPostSort('current');
           }}
-          isClicked={postSort[0]}
+          isClicked={postSort === 'current' ? true : false}
         >
           최신순
         </styles.Text>
         <styles.Text
           onClick={() => {
-            setPostSort && setPostSort([false, true]);
+            setPostSort && setPostSort('views');
           }}
-          isClicked={postSort[1]}
+          isClicked={postSort === 'views' ? true : false}
         >
           인기순
         </styles.Text>

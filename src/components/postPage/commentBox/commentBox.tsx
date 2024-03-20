@@ -5,11 +5,18 @@ import Pencil from '../../../images/boardPage/pencil.png';
 import CommentTotal from '../commentTotal/commentTotal';
 
 const CommentBox: React.FC = () => {
-  const { comments } = useContext(SessionContext);
+  const { comments, setWrittingComment } = useContext(SessionContext);
+
   return (
     <styles.Container>
       <styles.WriteCommentContainer>
-        <styles.TransParentInput placeholder="답변을 작성해주세요" />
+        {/*여기서 change 이벤트 */}
+        <styles.TransParentInput
+          placeholder="답변을 작성해주세요"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setWrittingComment && setWrittingComment(event.target.value); // set함수의 인자 타입은 문자열입니다.
+          }}
+        />
         <styles.WriteButton>
           <styles.Pencil src={Pencil} />
         </styles.WriteButton>

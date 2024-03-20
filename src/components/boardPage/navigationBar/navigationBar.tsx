@@ -13,6 +13,8 @@ import edit from '../../../images/boardPage/video.png';
 
 import { SessionContext } from '../boardComponent';
 
+import { KindName } from '../buttonBar/buttonBar';
+
 const NavigationBar: React.FC = () => {
   //이 객체의 키는 버튼이 가리킬 주소의 parameter로 들어가고 값은 버튼에 들어갈 아이콘 이미지 주소
   const iconImages = {
@@ -25,10 +27,17 @@ const NavigationBar: React.FC = () => {
   };
   //버튼 밑에 들어가는 버튼 이름이 담긴 배열
   const ButtonName = ['코딩', '디자인', '편집', '마켓팅', '기획', '기타'];
+  //게시글의 종류
+  const chooseName: { [key: string]: number } = {
+    total: 0,
+    question: 1,
+    study: 2,
+    etc: 3,
+  };
   // 전역 상태
   const [isClicked, setIsClicked] = useRecoilState(isClickedState);
   //boardPage내에서 공유하는 전체, 질문, 스터디 ,기타 중 유저가 선택한 데이터 -기본은 전체
-  const { dataChoose } = useContext(SessionContext);
+  const { dataChoose, setCategoryId } = useContext(SessionContext);
   return (
     <styles.Container>
       {Object.entries(iconImages).map(([key, value], index) => {
@@ -45,6 +54,13 @@ const NavigationBar: React.FC = () => {
                 (_, idx) => idx === index,
               );
               setIsClicked(newIsClicked);
+              if (setCategoryId) {
+                if (dataChoose && dataChoose in chooseName) {
+                  setCategoryId(KindName[key] + chooseName[dataChoose]);
+                } else {
+                  setCategoryId(1);
+                }
+              }
             }}
             isClicked={isClicked[index]}
           >
