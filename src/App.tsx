@@ -14,7 +14,9 @@ function App() {
             <Route path=":kind/" element={<BoardPage />} />
             <Route path=":kind/:choose" element={<BoardPage />} />
           </Route>
-          <Route path="/post/:board_id" element={<PostPage />} />
+          <Route path="/postPage/" element={<PostPage />}>
+            <Route path=":board_id" element={<PostPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

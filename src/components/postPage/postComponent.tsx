@@ -1,18 +1,22 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { SetStateAction } from 'react';
 //import { useParams } from 'react-router-dom';
 
+import axios from 'axios';
+
 import PostData from '../../types/common/postData';
-import CommentType from '../../types/common/comment';
+import CommentType from '../../types/PostPage/comment';
 import PostTop from './postTop/postTop';
 import CommentBox from './commentBox/commentBox';
+import { useParams } from 'react-router-dom';
 
 interface SessionContextType {
   data: PostData;
-  content: string;
   comments: CommentType[];
   writtingComment?: string;
   setWrittingComment?: React.Dispatch<SetStateAction<string>>;
+  setLikeCount?: React.Dispatch<SetStateAction<number>>;
+  likeCount: number;
 }
 
 const defaultSessionData: PostData = {
@@ -40,10 +44,11 @@ const defaultSessionData: PostData = {
 // 컨텍스트 생성
 export const SessionContext = createContext<SessionContextType>({
   data: defaultSessionData,
-  content: '',
   comments: [],
   writtingComment: undefined,
   setWrittingComment: undefined,
+  setLikeCount: undefined,
+  likeCount: 1,
 });
 
 interface ChildrenType {
@@ -56,18 +61,68 @@ interface PostComponentType extends React.FC<ChildrenType> {
 }
 const Post: PostComponentType = ({ children }) => {
   //게시글 클릭시 게시글을 데이터를 받아올때 사용할 id
-  //const { board_id } = useParams<{ board_id: string }>();
+  const { board_id } = useParams<{ board_id: string }>();
 
   //댓글창에 입력중인 값을 저장
   const [writtingComment, setWrittingComment] = useState<string>('');
+  //const [data, setData] = useState();
+  const [likeCount, setLikeCount] = useState<number>(0);
+  //댓글 배열
+  const [comments, setComments] = useState<CommentType[]>(defaultcomments);
+
+  const getPostData = async () => {
+    try {
+      const axiosInstance = axios.create({
+        baseURL: 'http://3.35.126.85:3000/',
+      });
+
+      const response = await axiosInstance.get(`boards/views/${board_id}`);
+      console.log(response);
+      //setData(response.data.data);
+    } catch (error) {
+      console.error('유저 데이터 가져오기 실패:', error);
+    }
+  };
+  const getCommentsData = async () => {
+    try {
+      const axiosInstance = axios.create({
+        baseURL: 'http://3.35.126.85:3000/',
+      });
+
+      const response = await axiosInstance.get(`comments/${board_id}`);
+      console.log(response);
+      setComments(response.data.data);
+      console.log(comments);
+    } catch (error) {
+      console.error('유저 데이터 가져오기 실패:', error);
+    }
+  };
+  const postCommentData = async () => {
+    try {
+      const axiosInstance = axios.create({
+        baseURL: 'http://3.35.126.85:3000/',
+      });
+
+      const response = await axiosInstance.post(`comments/${board_id}`);
+      console.log(response);
+      setComments(response.data.data);
+    } catch (error) {
+      console.error('유저 데이터 가져오기 실패:', error);
+    }
+  };
+  useEffect(() => {
+    getPostData(); //게시글 데이터 받아오기
+    getCommentsData(); //댓글 데이터 받아오기
+    postCommentData();
+  }, [likeCount]);
 
   const sessionContextValue: SessionContextType = {
     data: defaultSessionData,
-    content:
-      '강의 보는대로 flutter doctor -v치고 확인하니 이렇게 에러가 뜨네요 에러 뜬 링크대로 비쥬얼스튜디오를 다운로드 받았는데도 계속 뜨네요 ㅠ',
     comments: comments,
     writtingComment: writtingComment,
     setWrittingComment: setWrittingComment,
+    setLikeCount: setLikeCount,
+    likeCount: likeCount,
   };
 
   return (
@@ -82,7 +137,7 @@ export default Post;
 Post.postTop = PostTop;
 Post.commentBox = CommentBox;
 
-const comments = [
+const defaultcomments = [
   {
     id: 1,
     content:

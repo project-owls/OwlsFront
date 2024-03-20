@@ -17,7 +17,7 @@ const Article: React.FC<ArticleProps> = ({ post, isBoard }) => {
         </styles.Text>
       </styles.TextContainer>
       <styles.UserInfo>
-        <styles.UserProfile src={post.content} />
+        <styles.UserProfile src={post.user.profileImage.url} />
         <styles.Text>{post.user.nickname}</styles.Text>
       </styles.UserInfo>
     </styles.Container>
