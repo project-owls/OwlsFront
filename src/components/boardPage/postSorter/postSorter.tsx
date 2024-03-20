@@ -7,21 +7,21 @@ const PostSorter: React.FC = () => {
   const { postSort, setPostSort, data } = useContext(SessionContext);
   return (
     <styles.Container>
-      <styles.Count>{data.length}개</styles.Count>
+      <styles.Count>{data.boards.length}개</styles.Count>
       <styles.TextContainer>
         <styles.Text
           onClick={() => {
-            setPostSort && setPostSort([true, false]);
+            setPostSort && setPostSort('current');
           }}
-          isClicked={postSort[0]}
+          isClicked={postSort === 'current' ? true : false}
         >
           최신순
         </styles.Text>
         <styles.Text
           onClick={() => {
-            setPostSort && setPostSort([false, true]);
+            setPostSort && setPostSort('views');
           }}
-          isClicked={postSort[1]}
+          isClicked={postSort === 'views' ? true : false}
         >
           인기순
         </styles.Text>

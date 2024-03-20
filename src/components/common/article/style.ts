@@ -1,16 +1,15 @@
 import styled from 'styled-components';
+import TrendingArticleProps from '../../../types/common/isBoard';
 
-interface ArticleStylesProps {
-  id?: number;
-}
 const styles = {
-  Container: styled.div<ArticleStylesProps>`
+  Container: styled.div<TrendingArticleProps>`
     position: relative;
-    top: ${({ id }) => (id ? '30px' : '180px')};
-    left: ${({ id }) => (id ? '30px' : '140px')};
+    top: ${({ isBoard }) => (isBoard ? '180px' : '30px')};
+    left: ${({ isBoard }) => (isBoard ? '140px' : '30px')};
 
     width: 750px;
-    border-bottom: ${({ id }) => (id ? 'none' : 'solid 0.2px #d9d9d9')};
+    border-bottom: ${({ isBoard }) =>
+      isBoard ? 'solid 0.2px #d9d9d9' : 'none'};
   `,
   Kind: styled.p`
     color: #7a7a7a;

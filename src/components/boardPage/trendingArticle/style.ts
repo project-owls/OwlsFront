@@ -10,7 +10,7 @@ const styles = {
         : '700px'}; //임의로 잡아둠 보드게시판인지 아닌 지에따라 위치 변화
     left: ${({ isBoard }) => (isBoard ? '1000px' : '120px')};
 
-    width: auto;
+    width: ${({ isBoard }) => (isBoard ? '25vw' : '40vw')};
     padding: 10px;
 
     border: solid 0.3px #f5f5f5;

@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './style';
 import PostData from '../../../types/common/postData';
+
 interface ArticleProps {
   post: PostData;
-  id?: number;
+  isBoard: boolean;
 }
-const Article: React.FC<ArticleProps> = ({ post, id }) => {
+const Article: React.FC<ArticleProps> = ({ post, isBoard }) => {
   return (
-    <styles.Container id={id}>
+    <styles.Container isBoard={isBoard}>
       <styles.TextContainer>
         <styles.Kind>{post.boardCategory.name}</styles.Kind>
         <styles.Title>{post.title}</styles.Title>

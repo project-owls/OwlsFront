@@ -8,14 +8,18 @@ const Articles: React.FC = () => {
   const { data } = useContext(SessionContext);
   return (
     <div>
-      {data.map((post, index) => {
-        const path = `/postPage/${post.id}`;
-        return (
-          <styles.Link to={path} key={index}>
-            <Article post={post} />
-          </styles.Link>
-        );
-      })}
+      {data.boards && data.boards.length > 0 ? (
+        data.boards.map((post) => {
+          const path = `/postPage/${post.id}`;
+          return (
+            <styles.Link to={path} key={post.id}>
+              <Article post={post} isBoard={true} />
+            </styles.Link>
+          );
+        })
+      ) : (
+        <></> //게시물이 없을 경우 띄울 컴포넌트
+      )}
     </div>
   );
 };
