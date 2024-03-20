@@ -18,7 +18,9 @@ const Articles: React.FC = () => {
           );
         })
       ) : (
-        <></> //게시물이 없을 경우 띄울 컴포넌트
+        <div>
+          <styles.Text>게시글이 존재하지 않습니다.</styles.Text>
+        </div>
       )}
     </div>
   );

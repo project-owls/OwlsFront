@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './style';
 
 import Reply from '../../../images/postPage/reply.png';
-import CommentType from '../../../types/common/comment';
+import CommentType from '../../../types/PostPage/comment';
 
 import Comment from '../comment/comment';
 interface CommentProps {

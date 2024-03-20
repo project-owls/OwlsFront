@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './style';
 
-import CommentType from '../../../types/common/comment';
+import CommentType from '../../../types/PostPage/comment';
 import profileImage from '../../../images/postPage/profileImage.png';
 import Likes from '../../../images/postPage/likes.png';
 

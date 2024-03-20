@@ -5,8 +5,8 @@ import React, {
   useEffect,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import BoardData from '../../types/common/boardData';
+import axiosInstance from '../api/axiosInatance';
+import BoardData from '../../types/BoardPage/boardData';
 
 import SearchBar from './searchBar/searchBar';
 import NavigationBar from './navigationBar/navigationBar';
@@ -83,11 +83,8 @@ const Board: BoardComponentType = ({ children }) => {
   //카테고리 id
   const [categoryId, setCategoryId] = useState<number>(1);
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        const axiosInstance = axios.create({
-          baseURL: 'http://3.35.126.85:3000/',
-        });
         console.log('카테고리 아이디', categoryId);
         const response = await axiosInstance.get(
           `boards/views?category_id=${categoryId}&page=${page}&sort=${postSort}`,
@@ -98,7 +95,7 @@ const Board: BoardComponentType = ({ children }) => {
         console.error('유저 데이터 가져오기 실패:', error);
       }
     };
-    fetchData();
+    getData();
   }, [page, categoryId]);
 
   const sessionContextValue: SessionContextType = {
