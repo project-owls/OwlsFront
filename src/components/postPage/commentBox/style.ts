@@ -54,6 +54,8 @@ const styles = {
 
     background-color: #eade71;
     border-radius: 10px;
+
+    cursor: pointer;
   `,
   Pencil: styled.img`
     width: 30px;

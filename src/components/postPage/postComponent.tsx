@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { SetStateAction } from 'react';
 //import { useParams } from 'react-router-dom';
 
-import axiosInstance from '../api/axiosInatance';
+import axiosInstance from '../../api/axiosInatance';
 
 import PostData from '../../types/common/postData';
 import CommentType from '../../types/PostPage/comment';
@@ -82,7 +82,7 @@ const Post: PostComponentType = ({ children }) => {
   const getCommentsData = async () => {
     try {
       const response = await axiosInstance.get(`comments/${board_id}`);
-      console.log(response);
+      console.log('댓글:', response);
       setComments(response.data.data);
       console.log(comments);
     } catch (error) {
@@ -93,7 +93,7 @@ const Post: PostComponentType = ({ children }) => {
     try {
       const response = await axiosInstance.post(`comments/${board_id}`);
       console.log(response);
-      setComments(response.data.data);
+      //setComments(response.data.data);
     } catch (error) {
       console.error('유저 데이터 가져오기 실패:', error);
     }
