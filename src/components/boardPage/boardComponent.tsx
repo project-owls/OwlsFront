@@ -5,7 +5,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import axiosInstance from '../api/axiosInatance';
+import axiosInstance from '../../api/axiosInatance';
 import BoardData from '../../types/BoardPage/boardData';
 
 import SearchBar from './searchBar/searchBar';
@@ -37,6 +37,7 @@ interface SessionContextType {
   page: number;
   setPage?: React.Dispatch<SetStateAction<number>>;
   setCategoryId?: React.Dispatch<SetStateAction<number>>;
+  setSearch?: React.Dispatch<SetStateAction<string>>;
 }
 // 컨텍스트 생성 (기본값은 세션 데이터와 kind를 모두 포함)
 export const SessionContext = createContext<SessionContextType>({
@@ -51,6 +52,7 @@ export const SessionContext = createContext<SessionContextType>({
   page: 1,
   setPage: undefined,
   setCategoryId: undefined,
+  setSearch: undefined,
 });
 
 interface ChildrenType {
@@ -82,22 +84,42 @@ const Board: BoardComponentType = ({ children }) => {
 
   //카테고리 id
   const [categoryId, setCategoryId] = useState<number>(1);
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        console.log('카테고리 아이디', categoryId);
-        const response = await axiosInstance.get(
-          `boards/views?category_id=${categoryId}&page=${page}&sort=${postSort}`,
-        );
 
-        setData(response.data.data);
-      } catch (error) {
-        console.error('유저 데이터 가져오기 실패:', error);
-      }
-    };
+  //유저가 검색한 값
+  const [search, setSearch] = useState<string>('');
+
+  const getData = async () => {
+    try {
+      console.log('카테고리 아이디', categoryId);
+      const response = await axiosInstance.get(
+        `boards/views?category_id=${categoryId}&page=${page}&sort=${postSort}`,
+      );
+
+      setData(response.data.data);
+    } catch (error) {
+      console.error('유저 데이터 가져오기 실패:', error);
+    }
+  };
+
+  const getSearchData = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `boards/views/search?category_id=${categoryId}&page=${page}&sort=${postSort}&search=${search}`,
+      );
+
+      setData(response.data.data);
+      console.log(search);
+    } catch (error) {
+      console.error('유저 데이터 가져오기 실패:', error);
+    }
+  };
+  useEffect(() => {
     getData();
   }, [page, categoryId]);
 
+  useEffect(() => {
+    getSearchData();
+  }, [search]);
   const sessionContextValue: SessionContextType = {
     data: data, //서버에서 받아온 데이터 배열
     trendingData: defaultSessionData,
@@ -110,6 +132,7 @@ const Board: BoardComponentType = ({ children }) => {
     page: page,
     setPage: setPage,
     setCategoryId: setCategoryId,
+    setSearch: setSearch,
   };
 
   return (

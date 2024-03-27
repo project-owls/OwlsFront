@@ -37,6 +37,8 @@ const styles = {
     width: 30px;
     height: 40px;
     padding: 13px 0 0 0;
+
+    cursor: pointer;
   `,
 };
 export default styles;
