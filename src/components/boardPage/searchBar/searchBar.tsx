@@ -4,7 +4,7 @@ import SearchIcon from '../../../images/boardPage/Search.png';
 import { SessionContext } from '../boardComponent';
 const SearchBar: React.FC = () => {
   const { setSearch } = useContext(SessionContext);
-
+  //찾으려고 입력중인 검색어
   const [searchInput, setSearchInput] = useState<string>('');
   return (
     <styles.Container>
